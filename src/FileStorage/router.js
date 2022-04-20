@@ -13,8 +13,6 @@ router.get('/:filename', async (req, res) => {
 
     fileStream.pipe(res);
   } catch (error) {
-    console.error(error);
-
     res.json({ status: 'error' }).status(404);
   }
 });
@@ -28,7 +26,6 @@ router.put('/:filename', upload.single('file'), async (req, res) => {
 
     res.json({ status: 'success' });
   } catch (error) {
-    console.error(error);
     res.status(404).json({ status: 'error' });
   }
 });
