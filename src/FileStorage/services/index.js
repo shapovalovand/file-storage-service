@@ -3,8 +3,11 @@ const FileModel = require('../models/FileModel');
 
 class FileService {
   static async get(filename) {
-    const fileStream = LocalFileStorage.get(filename);
     const item = await FileModel.findOne({ where: { filename } });
+
+    if (!item) throw new Error('Unprocessable entity');
+
+    const fileStream = LocalFileStorage.get(filename);
 
     return {
       fileStream,
